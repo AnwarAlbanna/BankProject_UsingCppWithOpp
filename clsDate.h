@@ -88,7 +88,7 @@ public:
 
 	void Print()
 	{
-		cout << DateToString() << endl;
+		cout << DateToString();
 	}
 
 	static clsDate GetSystemDate()
