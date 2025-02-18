@@ -92,10 +92,22 @@
     <ClInclude Include="clsInputValidate.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="clsUpdateUserScreen.h">
+      <Filter>Header Files\UserScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsDeleteUserScreen.h">
+      <Filter>Header Files\UserScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsFindUserScreen.h">
+      <Filter>Header Files\UserScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt">
       <Filter>Header Files\ClientScreen</Filter>
+    </Text>
+    <Text Include="Users.txt">
+      <Filter>Header Files\UserScreen</Filter>
     </Text>
   </ItemGroup>
 </Project>

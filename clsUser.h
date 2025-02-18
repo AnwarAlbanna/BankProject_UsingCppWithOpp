@@ -34,7 +34,7 @@ private:
 		sUserObjectToLine += User.Phone + Seperator;
 		sUserObjectToLine += User.UserName + Seperator;
 		sUserObjectToLine += User.Password + Seperator;
-		sUserObjectToLine +=to_string( User.Permeations )+ Seperator;
+		sUserObjectToLine +=to_string( User.Permeations );
 	
 		return sUserObjectToLine;
 	}
