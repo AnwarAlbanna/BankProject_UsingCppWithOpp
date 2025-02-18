@@ -46,6 +46,9 @@ private:
 
 public:
    static void ShowUpdateClientScreen() {
+       if (!CheckAccessRights(clsUser::enPermisstion::pUpdateClient)) {
+           return;
+       }
 
         system("cls");
         string Title = "\t  Update Client Screen ";

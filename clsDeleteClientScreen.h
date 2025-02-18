@@ -3,6 +3,7 @@
 #include "clsBankClient.h"
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include "clsUser.h"
 using namespace std;
 
 class clsDeleteClientScreen : protected clsScreen
@@ -28,6 +29,9 @@ private :
 public:
 
   static void ShowDeleteClientScreen() {
+      if (!CheckAccessRights(clsUser::enPermisstion::pDeleteClient)) {
+          return;
+      }
 
       system("cls");
       string Title = "\t  Delete Client Screen ";

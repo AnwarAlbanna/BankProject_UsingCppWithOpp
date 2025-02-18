@@ -3,6 +3,7 @@
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "clsUser.h"
 using namespace std;
 
 class clsFindClientScreen : protected clsScreen
@@ -28,7 +29,9 @@ public:
 
     static void ShowFindClientScreen()
     {
-
+        if (!CheckAccessRights(clsUser::enPermisstion::pFindClinet)) {
+            return;
+        }
         system("cls");
         string Title = "\t  Found Client Screen ";
         _DrawScreenHeader(Title);

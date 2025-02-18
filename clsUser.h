@@ -280,5 +280,18 @@ private:
 			cout << "\n___________________\n";
 
 		}
+
+
+		bool CheckAccessPermission(enPermisstion Permisstion) {
+			if (this->_Permeations == enPermisstion::pAll)
+				return true;
+			if ((this->Permeations & Permisstion) == Permisstion)
+				return true;
+			else {
+				return false;
+			}
+		}
+
+
 };
 

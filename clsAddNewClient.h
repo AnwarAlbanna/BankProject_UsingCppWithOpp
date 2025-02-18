@@ -5,6 +5,7 @@
 #include "clsInputValidate.h"
 #include <iostream>
 #include <iomanip>
+#include "clsUser.h"
 using namespace std;
 class clsAddNewClient :protected clsScreen
 {
@@ -32,6 +33,9 @@ private:
 public :
 
    static void ShowAddNewClient() {
+       if (!CheckAccessRights(clsUser::enPermisstion::pAddNewClient)) {
+           return;
+       }
        system("cls");
        string Title = "\t  Add Client Screen ";
        _DrawScreenHeader(Title);

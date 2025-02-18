@@ -101,6 +101,9 @@ private:
 
 public:
 	static void ManageUsers() {
+		if (!CheckAccessRights(clsUser::enPermisstion::pManagUsers)) {
+			return;
+		}
 		system("cls");
 		_DrawScreenHeader("\tManage User Screen ");
 		cout << setw(37) << left << "" << "===========================================\n";
