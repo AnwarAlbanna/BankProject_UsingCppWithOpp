@@ -80,9 +80,12 @@ private:
         clsManageUsersScreen::ManageUsers();
     }
 
-    static void _ShowEndScreen()
+   /* static void _ShowEndScreen()
     {
         cout << "\nEnd Screen Will be here...\n";
+
+    }*/
+    static void Logout() {
 
     }
 
@@ -135,8 +138,7 @@ private:
 
         case enTransactionsOptions::eExit:
             system("cls");
-            _ShowEndScreen();
-            //Login();
+            Logout();// this func go back to Login Screen 
 
             break;
         }
