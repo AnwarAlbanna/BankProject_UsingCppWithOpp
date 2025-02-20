@@ -91,6 +91,15 @@ private:
 	void _AddNew() {
 		_AddDataLineToFile(_ConvertUserObjectToLine(*this));
 	}
+	 string  _ConvertDataRegisterToLine()
+	{
+		string sDataRegisterLine = "";
+		sDataRegisterLine += clsDate::GetSystemDateAndTime() + "#//#";
+		sDataRegisterLine += UserName + "#//#";
+		sDataRegisterLine += Password + "#//#";
+		sDataRegisterLine += to_string(Permeations);
+		return sDataRegisterLine;
+	}
 
 	void _Update() {
 		vector<clsUser> vUser;
@@ -289,6 +298,20 @@ private:
 				return true;
 			else {
 				return false;
+			}
+		}
+
+		 void RegisterInLog() {
+			string sDataLineRegister = _ConvertDataRegisterToLine();
+			fstream MyFile;
+			MyFile.open("RegisterLog.txt", ios::out | ios::app);
+
+			if (MyFile.is_open())
+			{
+
+				MyFile << sDataLineRegister << endl;
+
+				MyFile.close();
 			}
 		}
 

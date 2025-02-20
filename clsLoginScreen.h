@@ -35,26 +35,14 @@ class clsLoginScreen :protected clsScreen
 
 			CurrentUser = clsUser::Find(UserName, Password);
 			LoginFiled = CurrentUser.IsEmpty();
-			SaveRegisterLog();
+			
 
 		} while (LoginFiled);
+		CurrentUser.RegisterInLog();
 		clsMainScreen::ShowMainMenue();
 
 	}
-	static void _AddDataLineToRegisterLog(string  stDataLine)
-	{
-		fstream MyFile;
-		MyFile.open("RegisterLog.txt", ios::out | ios::app);
-
-		if (MyFile.is_open())
-		{
-
-			MyFile << stDataLine << endl;
-
-			MyFile.close();
-		}
-
-	}
+	
 
  public:
 
@@ -63,14 +51,8 @@ class clsLoginScreen :protected clsScreen
 		_DrawScreenHeader("\tLogin Screen ");
 		return _Login();
 	}
-	static void SaveRegisterLog() {
-		string S = "";
-		S += clsDate::DateToString(clsDate()) + "#//#";
-		S += CurrentUser.UserName + "#//#";
-		S += CurrentUser.Password + "#//#";
-		S +=to_string( CurrentUser.Permeations ) ;
-		_AddDataLineToRegisterLog(S);
-	}
+
+	
 
 
 
