@@ -8,6 +8,7 @@
 
 
 using namespace std;
+class clsLoginRegisterScreen : protected clsScreen
 {
 private:
     static void PrintLogRegisterRecordLine(clsUser::stLoginRegisterRecord LogReg)

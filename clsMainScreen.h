@@ -86,11 +86,11 @@ private:
         clsLoginRegisterScreen::ShowLoginRegisterScreen();
     }
 
-    static void _ShowLoginRegisterScreen()
-    {
-       //cout << "\nLogin Register  Will be here...\n";
-        clsLoginRegisterScreen::ShowRegisterLoginList();
-    }
+    //static void _ShowLoginRegisterScreen()
+    //{
+    //   //cout << "\nLogin Register  Will be here...\n";
+    //    clsLoginRegisterScreen::ShowLoginRegisterScreen();
+    //}
 
   
     static void Logout() {
@@ -135,12 +135,6 @@ private:
         case enTransactionsOptions::eShowTransactionsMenue:
             system("cls");
             _ShowTransactionsMenue();
-            _GoBackToMainMenue();
-            break;
-
-        case enTransactionsOptions::eLoginRegister:
-            system("cls");
-            _ShowLoginRegisterScreen();
             _GoBackToMainMenue();
             break;
 

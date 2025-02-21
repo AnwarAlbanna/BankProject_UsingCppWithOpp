@@ -66,18 +66,8 @@ private:
 		if (MyFile.is_open()) {
 			string Line;
 			while (getline(MyFile, Line)) {
-				if (FileName == "Users.txt")
-				{
 					clsUser User = _ConvertLineToUserObject(Line);
 					vUser.push_back(User);
-				}
-				else
-				{
-					clsUser User = _ConvertLineToUserObject2(Line);
-					vUser.push_back(User);
-				}
-
-				
 			}
 			MyFile.close();
 		  }
@@ -351,7 +341,7 @@ private:
 
 		}
 		
-		void Print()
+		/*void Print()
 		{
 			cout << "\nUser Card:";
 			cout << "\n___________________";
@@ -365,7 +355,7 @@ private:
 			cout << "\nPermeation  : " << Permeations;
 			cout << "\n___________________\n";
 
-		}
+		}*/
 
 
 		bool CheckAccessPermission(enPermisstion Permisstion) {
