@@ -20,7 +20,7 @@ private:
 	enum enTransactionsOptions {
 		eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
 		eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-		eManageUsers = 7,eLoginRegister, eExit = 9
+		eManageUsers = 7,eLoginRegister=8, eExit = 9
 	};
 	static short _ReadMainMenueOption()
 	{
@@ -79,6 +79,11 @@ private:
     {
         //cout << "\nUsers Menue Will be here...\n";
         clsManageUsersScreen::ManageUsers();
+    }
+    static void _ShowLoginRegisterScreen()
+    {
+        //cout << "\n Login Register Screen Will be here...\n";
+        clsLoginRegisterScreen::ShowLoginRegisterScreen();
     }
 
     static void _ShowLoginRegisterScreen()
@@ -142,6 +147,12 @@ private:
         case enTransactionsOptions::eManageUsers:
             system("cls");
             _ShowManageUsersMenue();
+            _GoBackToMainMenue();
+            break;
+
+        case enTransactionsOptions::eLoginRegister:
+            system("cls");
+            _ShowLoginRegisterScreen();
             _GoBackToMainMenue();
             break;
 

@@ -1,31 +1,32 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include <iomanip>
 #include "clsUser.h"
 #include "clsDate.h"
 #include "clsScreen.h"
 
+
 using namespace std;
-class clsLoginRegisterScreen : clsScreen
 {
 private:
-    static void PrintRegisterLogRecordLine(clsUser UserLog)
+    static void PrintLogRegisterRecordLine(clsUser::stLoginRegisterRecord LogReg)
     {
 
-        cout << setw(8) << left << "" << "| " << setw(30) << left << clsDate::GetSystemDateAndTime();
-        cout << "| " << setw(12) << left << UserLog.UserName;
-        cout << "| " << setw(12) << left << UserLog.Password;
-        cout << "| " << setw(12) << left << UserLog.Permeations;
-
+        cout << setw(8) << left << "" << "| " << setw(20) << left << LogReg.DateTime;
+        cout << "| " << setw(20) << left << LogReg.UserName;
+        cout << "| " << setw(10) << left << LogReg.Password;
+        cout << "| " << setw(10) << left << LogReg.Permission;
     }
 public:
-    static void ShowRegisterLoginList() {
-       /* if (!CheckAccessRights(clsUser::enPermisstion::pShowClients)) {
+    static void ShowLoginRegisterScreen() {
+        if (!CheckAccessRights(clsUser::enPermisstion::pLoginRegister)) {
             return;
-        }*/
-        vector <clsUser> vRegisterLog = clsUser::GetRegisterLogList();
-        string Title = "\t  RegisterLogin List Screen";
-        string SubTitle = "\t    (" + to_string(vRegisterLog.size()) + ") Login Number(s).";
+        }
+
+        vector <clsUser::stLoginRegisterRecord> vLogRegister = clsUser::GetLogRegister();
+        string Title = "\t  Login Register Screen";
+        string SubTitle = "\t    (" + to_string(vLogRegister.size()) + ") Register(s).";
 
         _DrawScreenHeader(Title, SubTitle);
 
@@ -33,26 +34,28 @@ public:
         cout << setw(8) << left << "" << "\n\t_______________________________________________________";
         cout << "_________________________________________\n" << endl;
 
-        cout << setw(8) << left << "" << "| " << left << setw(30) << "Date/Time"; 
-        cout << "| " << left << setw(12) << "UserName";
-        cout << "| " << left << setw(12) << "Password";
-        cout << "| " << left << setw(12) << "Permissions";
+        cout << setw(8) << left << "" << "| " << left << setw(20) << "Date/Time";
+        cout << "| " << left << setw(20) << "UserName";
+        cout << "| " << left << setw(10) << "Password";
+        cout << "| " << left << setw(10) << "Permeation";
         cout << setw(8) << left << "" << "\n\t_______________________________________________________";
         cout << "_________________________________________\n" << endl;
 
-        if (vRegisterLog.size() == 0)
-            cout << "\t\t\t\tNo Register Login Available In the System!";
+        if (vLogRegister.size() == 0)
+            cout << "\t\t\t\tNo Clients Available In the System!";
         else
 
-            for (clsUser Reg : vRegisterLog)
+            for (clsUser::stLoginRegisterRecord& LogReg : vLogRegister)
             {
 
-                PrintRegisterLogRecordLine(Reg);
+                PrintLogRegisterRecordLine(LogReg);
                 cout << endl;
             }
 
         cout << setw(8) << left << "" << "\n\t_______________________________________________________";
         cout << "_________________________________________\n" << endl;
     }
+
+
 };
 

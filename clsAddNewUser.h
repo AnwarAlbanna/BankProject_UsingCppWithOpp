@@ -38,6 +38,11 @@ private:
 		}
 
 		else {
+			cout << "Do you want gave ShowClientList permission [y/n] :";
+			cin >> Answer;
+			if (Answer == 'Y' || Answer == 'y') {
+				Permission += (short)clsUser::enPermisstion::pShowClients;
+			}
 			cout << "Do you want gave AddNewClient permission [y/n] :";
 			cin >> Answer;
 			if (Answer == 'Y' || Answer == 'y') {
@@ -69,10 +74,11 @@ private:
 				Permission += (short)clsUser::enPermisstion::pManagUsers;
 			}
 
-			cout << "Do you want gave Logout permission [y/n] :";
+
+			cout << "Do you want gave Login Register permission [y/n] :";
 			cin >> Answer;
 			if (Answer == 'Y' || Answer == 'y') {
-				Permission += (short)clsUser::enPermisstion::pLogout;
+				Permission += (short)clsUser::enPermisstion::pLoginRegister;
 			}
 
 			return Permission;
