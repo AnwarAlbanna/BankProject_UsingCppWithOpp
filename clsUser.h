@@ -380,8 +380,8 @@ private:
 
 				MyFile.close();
 			}
-		}
-
+		 }
+		 
 
 };
 
