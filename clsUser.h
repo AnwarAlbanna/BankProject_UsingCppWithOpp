@@ -17,6 +17,7 @@ private:
 	string _UserName = "";
 	string _Password = "";
 	short  _Permeations = 0;
+	string Date;
 
 	bool _MarkedForDelete = false;
 
@@ -26,6 +27,15 @@ private:
 		vUser = clsString::Split(Line, Seperator);
 		return clsUser(enMode::UpdateMode,vUser[0],vUser[1], vUser[2], vUser[3], vUser[4], vUser[5],stoi(vUser[6]));
 	}
+
+
+	static clsUser _ConvertLineToUserObject2(string Line, string Seperator = "#//#") {
+		vector<string> vUser;
+		vUser = clsString::Split(Line, Seperator);
+		return clsUser(enMode::UpdateMode, vUser[0], vUser[1], vUser[2], stoi(vUser[3]));
+	}
+
+
 	static string _ConvertUserObjectToLine(clsUser User, string Seperator = "#//#") {
 		string sUserObjectToLine = "";
 		sUserObjectToLine += User.FirstName + Seperator;
@@ -39,15 +49,25 @@ private:
 		return sUserObjectToLine;
 	}
 
-	static vector<clsUser> _LoadUsersDataFromFile() {
+	static vector<clsUser> _LoadUsersDataFromFile(string FileName) {
 		vector <clsUser> vUser;
 		fstream MyFile;
-		MyFile.open("Users.txt", ios::in);
+		MyFile.open(FileName, ios::in);
 		if (MyFile.is_open()) {
 			string Line;
 			while (getline(MyFile, Line)) {
-				clsUser User = _ConvertLineToUserObject(Line);
-				vUser.push_back(User);
+				if (FileName == "Users.txt")
+				{
+					clsUser User = _ConvertLineToUserObject(Line);
+					vUser.push_back(User);
+				}
+				else
+				{
+					clsUser User = _ConvertLineToUserObject2(Line);
+					vUser.push_back(User);
+				}
+
+				
 			}
 			MyFile.close();
 		  }
@@ -103,7 +123,7 @@ private:
 
 	void _Update() {
 		vector<clsUser> vUser;
-		vUser = _LoadUsersDataFromFile();
+		vUser = _LoadUsersDataFromFile("Users.txt");
 		for (clsUser& U : vUser) {
 			if (U.UserName == UserName) {
 				U = *this;
@@ -128,6 +148,13 @@ private:
 			this->_Permeations = Permeations;
 			this->_Mode = Mode;
 		}
+		clsUser(enMode Mode, string Date,string UserName, string Password, short Permeations) :clsPerson(FirstName, LastName, Email, Phone) {
+			this->Date = Date;
+			this->_UserName = UserName;
+			this->_Password = Password;
+			this->_Permeations = Permeations;
+			this->_Mode = Mode;
+		}
 		enum enPermisstion { pAll = -1, pShowClients = 1, pAddNewClient=2, pDeleteClient = 4, pUpdateClient=8,
 							pFindClinet=16, pTransaction=32,pManagUsers=64,pLogout=128};
 		void SetUserName(string UserName) {
@@ -137,6 +164,8 @@ private:
 			return _UserName;
 		}
 		__declspec(property(get = GetUserName, put = SetUserName)) string UserName;
+
+
 		void SetPassword(string Password) {
 			this->_Password = Password;
 		}
@@ -144,6 +173,17 @@ private:
 			return _Password;
 		}
 		__declspec(property(get = GetPassword, put = SetPassword)) string Password;
+
+
+		void SetDate(string Date) {
+			this->Date = Date;
+		}
+		string GetDate() {
+			return Date;
+		}
+		__declspec(property(get = GetDate, put = SetDate)) string Date;
+
+
 		void SetPermeations(short Permeations) {
 			this->_Permeations = Permeations;
 		}
@@ -203,7 +243,7 @@ private:
 		bool Delete()
 		{
 			vector <clsUser> vUsers;
-			vUsers = _LoadUsersDataFromFile();
+			vUsers = _LoadUsersDataFromFile("Users.txt");
 
 			for (clsUser & U : vUsers)
 			{
@@ -230,7 +270,11 @@ private:
 
 		static vector <clsUser> GetUsersList()
 		{
-			return _LoadUsersDataFromFile();
+			return _LoadUsersDataFromFile("Users.txt");
+		}
+		static vector <clsUser> GetRegisterLogList()
+		{
+			return _LoadUsersDataFromFile("RegisterLog.txt");
 		}
 
 		enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserNameExists = 2 };
