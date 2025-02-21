@@ -26,17 +26,36 @@ private:
 		vUser = clsString::Split(Line, Seperator);
 		return clsUser(enMode::UpdateMode,vUser[0],vUser[1], vUser[2], vUser[3], vUser[4], vUser[5],stoi(vUser[6]));
 	}
-	static string _ConvertUserObjectToLine(clsUser User, string Seperator = "#//#") {
-		string sUserObjectToLine = "";
-		sUserObjectToLine += User.FirstName + Seperator;
-		sUserObjectToLine += User.LastName + Seperator;
-		sUserObjectToLine += User.Email + Seperator;
-		sUserObjectToLine += User.Phone + Seperator;
-		sUserObjectToLine += User.UserName + Seperator;
-		sUserObjectToLine += User.Password + Seperator;
-		sUserObjectToLine +=to_string( User.Permeations );
-	
-		return sUserObjectToLine;
+	struct stLoginRegisterRecord;
+	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
+	{
+		stLoginRegisterRecord LoginRegisterRecord;
+
+
+		vector <string> LoginRegisterDataLine = clsString::Split(Line, Seperator);
+		LoginRegisterRecord.DateTime = LoginRegisterDataLine[0];
+		LoginRegisterRecord.UserName = LoginRegisterDataLine[1];
+		LoginRegisterRecord.Password = LoginRegisterDataLine[2];
+		LoginRegisterRecord.Permission = stoi(LoginRegisterDataLine[3]);
+
+		return LoginRegisterRecord;
+
+	}
+
+	static vector<stLoginRegisterRecord> _LoadLoginRegisterDataFromFile() {
+		vector <stLoginRegisterRecord> vLogRegister;
+		fstream MyFile;
+		MyFile.open("RegisterLog.txt", ios::in);
+		if (MyFile.is_open()) {
+			string Line;
+			while (getline(MyFile, Line)) {
+				stLoginRegisterRecord LogReg = _ConvertLoginRegisterLineToRecord(Line);
+				vLogRegister.push_back(LogReg);
+			}
+			MyFile.close();
+		}
+
+		return vLogRegister;
 	}
 
 	static vector<clsUser> _LoadUsersDataFromFile() {
@@ -53,6 +72,19 @@ private:
 		  }
 
 		return vUser;
+	}
+
+	static string _ConvertUserObjectToLine(clsUser User, string Seperator = "#//#") {
+		string sUserObjectToLine = "";
+		sUserObjectToLine += User.FirstName + Seperator;
+		sUserObjectToLine += User.LastName + Seperator;
+		sUserObjectToLine += User.Email + Seperator;
+		sUserObjectToLine += User.Phone + Seperator;
+		sUserObjectToLine += User.UserName + Seperator;
+		sUserObjectToLine += User.Password + Seperator;
+		sUserObjectToLine += to_string(User.Permeations);
+
+		return sUserObjectToLine;
 	}
 
 	static void _SaveUsersDataToFile(vector <clsUser> vUser) {
@@ -91,7 +123,8 @@ private:
 	void _AddNew() {
 		_AddDataLineToFile(_ConvertUserObjectToLine(*this));
 	}
-	 string  _ConvertDataRegisterToLine()
+
+	 string  _PreperLoginRegisterToLine()
 	{
 		string sDataRegisterLine = "";
 		sDataRegisterLine += clsDate::GetSystemDateAndTime() + "#//#";
@@ -99,7 +132,7 @@ private:
 		sDataRegisterLine += Password + "#//#";
 		sDataRegisterLine += to_string(Permeations);
 		return sDataRegisterLine;
-	}
+	 }
 
 	void _Update() {
 		vector<clsUser> vUser;
@@ -120,6 +153,15 @@ private:
 
 
 	public:
+		 struct stLoginRegisterRecord {
+			string DateTime;
+			string UserName;
+			string Password;
+			short Permission;
+		};
+		 static vector<stLoginRegisterRecord> GetLogRegister() {
+			 return _LoadLoginRegisterDataFromFile();
+		 }
 
 		clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone,
 			string UserName, string Password, short Permeations) :clsPerson(FirstName, LastName, Email, Phone) {
@@ -302,7 +344,7 @@ private:
 		}
 
 		 void RegisterInLog() {
-			string sDataLineRegister = _ConvertDataRegisterToLine();
+			string sDataLineRegister = _PreperLoginRegisterToLine();
 			fstream MyFile;
 			MyFile.open("RegisterLog.txt", ios::out | ios::app);
 
