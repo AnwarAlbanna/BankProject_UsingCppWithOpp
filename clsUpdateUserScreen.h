@@ -82,6 +82,12 @@ private:
 			Permission += clsUser::enPermisstion::pManagUsers;
 		}
 
+		cout << "Do you want gave Login Register permission [y/n] :";
+		cin >> Answer;
+		if (Answer == 'Y' || Answer == 'y') {
+			Permission += (short)clsUser::enPermisstion::pLoginRegister;
+		}
+
 		return Permission;
 	}
 	static void _PrintUser(clsUser User) {

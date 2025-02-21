@@ -171,7 +171,7 @@ private:
 			this->_Mode = Mode;
 		}
 		enum enPermisstion { pAll = -1, pShowClients = 1, pAddNewClient=2, pDeleteClient = 4, pUpdateClient=8,
-							pFindClinet=16, pTransaction=32,pManagUsers=64,pLogout=128};
+							pFindClinet=16, pTransaction=32,pManagUsers=64,pLoginRegister,pLogout=256};
 		void SetUserName(string UserName) {
 			this->_UserName = UserName;
 		}

@@ -108,7 +108,7 @@
       <Filter>Header Files\UserScreen</Filter>
     </ClInclude>
     <ClInclude Include="clsLoginRegisterScreen.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\UserScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
