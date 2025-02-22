@@ -59,10 +59,10 @@ private:
 		return vLogRegister;
 	}
 
-	static vector<clsUser> _LoadUsersDataFromFile(string FileName) {
+	static vector<clsUser> _LoadUsersDataFromFile() {
 		vector <clsUser> vUser;
 		fstream MyFile;
-		MyFile.open(FileName, ios::in);
+		MyFile.open("Users.txt", ios::in);
 		if (MyFile.is_open()) {
 			string Line;
 			while (getline(MyFile, Line)) {
@@ -125,19 +125,19 @@ private:
 		_AddDataLineToFile(_ConvertUserObjectToLine(*this));
 	}
 
-	 string  _PreperLoginRegisterToLine()
-	{
+	 string  _PreperLoginRegisterToLine(string Sparator="#//#")
+	 {
 		string sDataRegisterLine = "";
-		sDataRegisterLine += clsDate::GetSystemDateAndTime() + "#//#";
-		sDataRegisterLine += UserName + "#//#";
-		sDataRegisterLine += Password + "#//#";
+		sDataRegisterLine += clsDate::GetSystemDateAndTime() + Sparator;
+		sDataRegisterLine += UserName + Sparator;
+		sDataRegisterLine += Password + Sparator;
 		sDataRegisterLine += to_string(Permeations);
 		return sDataRegisterLine;
 	 }
 
 	void _Update() {
 		vector<clsUser> vUser;
-		vUser = _LoadUsersDataFromFile("Users.txt");
+		vUser = _LoadUsersDataFromFile();
 		for (clsUser& U : vUser) {
 			if (U.UserName == UserName) {
 				U = *this;
@@ -266,7 +266,7 @@ private:
 		bool Delete()
 		{
 			vector <clsUser> vUsers;
-			vUsers = _LoadUsersDataFromFile("Users.txt");
+			vUsers = _LoadUsersDataFromFile();
 
 			for (clsUser & U : vUsers)
 			{
@@ -293,12 +293,12 @@ private:
 
 		static vector <clsUser> GetUsersList()
 		{
-			return _LoadUsersDataFromFile("Users.txt");
+			return _LoadUsersDataFromFile();
 		}
-		static vector <clsUser> GetRegisterLogList()
+	/*	static vector <clsUser> GetRegisterLogList()
 		{
-			return _LoadUsersDataFromFile("RegisterLog.txt");
-		}
+			return _LoadUsersDataFromFile();
+		}*/
 
 		enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserNameExists = 2 };
 		enSaveResults Save()
@@ -380,8 +380,8 @@ private:
 
 				MyFile.close();
 			}
-		}
-
+		 }
+		 
 
 };
 
