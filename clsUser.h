@@ -6,6 +6,7 @@
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "clsUtil.h"
 using namespace std;
 class clsUser : public clsPerson
 {
@@ -25,7 +26,7 @@ private:
 	static clsUser _ConvertLineToUserObject(string Line,string Seperator="#//#") {
 		vector<string> vUser;
 		vUser = clsString::Split(Line, Seperator);
-		return clsUser(enMode::UpdateMode,vUser[0],vUser[1], vUser[2], vUser[3], vUser[4], vUser[5],stoi(vUser[6]));
+		return clsUser(enMode::UpdateMode,vUser[0],vUser[1], vUser[2], vUser[3], vUser[4],clsUtil::DecryptText( vUser[5]),stoi(vUser[6]));
 	}
 	struct stLoginRegisterRecord;
 	static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
@@ -36,7 +37,7 @@ private:
 		vector <string> LoginRegisterDataLine = clsString::Split(Line, Seperator);
 		LoginRegisterRecord.DateTime = LoginRegisterDataLine[0];
 		LoginRegisterRecord.UserName = LoginRegisterDataLine[1];
-		LoginRegisterRecord.Password = LoginRegisterDataLine[2];
+		LoginRegisterRecord.Password =clsUtil::DecryptText( LoginRegisterDataLine[2]);
 		LoginRegisterRecord.Permission = stoi(LoginRegisterDataLine[3]);
 
 		return LoginRegisterRecord;
@@ -82,7 +83,7 @@ private:
 		sUserObjectToLine += User.Email + Seperator;
 		sUserObjectToLine += User.Phone + Seperator;
 		sUserObjectToLine += User.UserName + Seperator;
-		sUserObjectToLine += User.Password + Seperator;
+		sUserObjectToLine += clsUtil::EncryptText(User.Password) + Seperator;
 		sUserObjectToLine += to_string(User.Permeations);
 
 		return sUserObjectToLine;
@@ -130,7 +131,7 @@ private:
 		string sDataRegisterLine = "";
 		sDataRegisterLine += clsDate::GetSystemDateAndTime() + Sparator;
 		sDataRegisterLine += UserName + Sparator;
-		sDataRegisterLine += Password + Sparator;
+		sDataRegisterLine += clsUtil::EncryptText(Password)+Sparator;
 		sDataRegisterLine += to_string(Permeations);
 		return sDataRegisterLine;
 	 }

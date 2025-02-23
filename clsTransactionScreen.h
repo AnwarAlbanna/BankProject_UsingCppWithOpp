@@ -99,7 +99,7 @@ private:
 
         case enTransactionsOptions::eMainMenue:
         {
-            _GoBackToTransactionScreen();
+           
         }
         }
     }
