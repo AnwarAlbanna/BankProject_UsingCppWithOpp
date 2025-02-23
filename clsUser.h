@@ -155,11 +155,11 @@ private:
 
 	public:
 		 struct stLoginRegisterRecord {
-			string DateTime;
-			string UserName;
-			string Password;
-			short Permission;
-		};
+			string DateTime="";
+			string UserName="";
+			string Password="";
+			short Permission=0;
+		 };
 		 static vector<stLoginRegisterRecord> GetLogRegister() {
 			 return _LoadLoginRegisterDataFromFile();
 		 }
