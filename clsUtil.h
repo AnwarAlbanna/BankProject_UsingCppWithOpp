@@ -193,7 +193,7 @@ public:
         return t;
     }
 
-    static string  EncryptText(string Text, short EncryptionKey=2)
+    static string  EncryptText(string Text, short EncryptionKey = 2)
     {
 
         for (int i = 0; i <= Text.length(); i++)

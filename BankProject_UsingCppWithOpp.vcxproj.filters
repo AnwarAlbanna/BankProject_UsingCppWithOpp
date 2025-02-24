@@ -22,6 +22,9 @@
     <Filter Include="Header Files\UserScreen">
       <UniqueIdentifier>{100d98b4-6b81-4f72-a4fd-e7ca820ea30d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Currency">
+      <UniqueIdentifier>{5845432d-1cb9-460e-bca1-d720187489cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BankProject_UsingCppWithOpp.cpp">
@@ -110,6 +113,18 @@
     <ClInclude Include="clsLoginRegisterScreen.h">
       <Filter>Header Files\UserScreen</Filter>
     </ClInclude>
+    <ClInclude Include="clsTransferListScreen.h">
+      <Filter>Header Files\ClientScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsTransferScreen.h">
+      <Filter>Header Files\ClientScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsCurrency.h">
+      <Filter>Header Files\Currency</Filter>
+    </ClInclude>
+    <ClInclude Include="clsCurrencisScreen.h">
+      <Filter>Header Files\Currency</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt">
@@ -120,6 +135,12 @@
     </Text>
     <Text Include="RegisterLog.txt">
       <Filter>Header Files\UserScreen</Filter>
+    </Text>
+    <Text Include="TransferLog.txt">
+      <Filter>Header Files\ClientScreen</Filter>
+    </Text>
+    <Text Include="Currencies.txt">
+      <Filter>Header Files\Currency</Filter>
     </Text>
   </ItemGroup>
 </Project>
