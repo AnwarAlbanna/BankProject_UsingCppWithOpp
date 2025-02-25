@@ -134,6 +134,7 @@
     <ClInclude Include="clsAddNewUser.h" />
     <ClInclude Include="clsBankClient.h" />
     <ClInclude Include="clsClientListScreen.h" />
+    <ClInclude Include="clsCurrenciesListScreen.h" />
     <ClInclude Include="clsCurrencisScreen.h" />
     <ClInclude Include="clsCurrency.h" />
     <ClInclude Include="clsDate.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="clsUsersListScreen.h" />
     <ClInclude Include="clsUtil.h" />
     <ClInclude Include="clsWithdrawScreen.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt" />
@@ -169,6 +171,9 @@
     <Text Include="RegisterLog.txt" />
     <Text Include="TransferLog.txt" />
     <Text Include="Users.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BankProject_UsingCppWithOpp.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

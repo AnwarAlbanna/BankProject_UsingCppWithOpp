@@ -32,7 +32,8 @@ public:
         cout << setw(8) << left << "" << "\n\t_______________________________________________________";
         cout << "_________________________________________\n" << endl;
 
-        cout << setw(8) << left << "" << "| " << left << setw(15) << "UserName";
+        cout << setw(8) << left << "" << "| ";
+        cout<< left << setw(15) << "UserName";
         cout << "| " << left << setw(20) << "Full Name";
         cout << "| " << left << setw(12) << "Phone";
         cout << "| " << left << setw(20) << "Email";
