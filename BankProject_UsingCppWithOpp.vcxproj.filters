@@ -125,6 +125,9 @@
     <ClInclude Include="clsCurrencisScreen.h">
       <Filter>Header Files\Currency</Filter>
     </ClInclude>
+    <ClInclude Include="clsFindCurrencyScreen.h">
+      <Filter>Header Files\Currency</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt">
