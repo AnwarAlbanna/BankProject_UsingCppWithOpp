@@ -9,7 +9,7 @@ using namespace std;
 class clsFindCurrencyScreen : protected clsScreen
 {
 
-private:
+ private:
 	static void _PrintCurrency(clsCurrency Currency) {
 		cout << "\n--------------------------------------------------------";
 		cout << "\n Country      :" << Currency.Country();
@@ -18,24 +18,24 @@ private:
 		cout << "\n Rate         :" << Currency.Rate();
 		cout << "\n--------------------------------------------------------";
 
-            cout << "\n_____________________________\n";
+		cout << "\n_____________________________\n";
 
 	}
 
-        static void _ShowResults(clsCurrency Currency)
-        {
-            if (!Currency.IsEmpty())
-            {
-                cout << "\nCurrency Found :-)\n";
-                _PrintCurrency(Currency);
-            }
-            else
-            {
-                cout << "\nCurrency Was not Found :-(\n";
-            }
-        }
+	static void _ShowResults(clsCurrency Currency)
+	{
+		if (!Currency.IsEmpty())
+		{
+			cout << "\nCurrency Found :-)\n";
+			_PrintCurrency(Currency);
+		}
+		else
+		{
+			cout << "\nCurrency Was not Found :-(\n";
+		}
+	}
 
-public:
+ public:
 	static void ShowFindCurrencyScreen() {
 		string Currency = "";
 		system("cls");
@@ -47,35 +47,16 @@ public:
 		if (choos == 1) {
 			cout << "Please Enter the CountryCode :";
 			Currency = clsInputValidate::ReadString();
-			while (!clsCurrency::IsCurrencyExist(Currency)) {
-				cout << "\nThe Currency Name is Not Found ,choos anther one :";
-				Currency = clsInputValidate::ReadString();
-
-            if (Answer == 1)
-            {
-                string CurrencyCode;
-                cout << "\nPlease Enter CurrencyCode: ";
-                CurrencyCode = clsInputValidate::ReadString();
-                clsCurrency Currency = clsCurrency::FindByCode(CurrencyCode);
-                _ShowResults(Currency);
-			}
 			clsCurrency C = clsCurrency::FindByCode(Currency);
-			_PrintCurrency(C);
+			_ShowResults(C);
+				
 		}
+		
 		else if (choos == 2) {
 			cout << "Please Enter the Country :";
 			Currency = clsInputValidate::ReadString();
-			while (!clsCurrency::IsCurrencyExist(Currency)) {
-				cout << "\nThe Currency Name is Not Found ,choos anther one :";
-				Currency = clsInputValidate::ReadString();
-
-			}
 			clsCurrency C = clsCurrency::FindByCountry(Currency);
-			_PrintCurrency(C);
+			_ShowResults(C);
 		}
-
-	}
-
-
+    } 
 };
-
