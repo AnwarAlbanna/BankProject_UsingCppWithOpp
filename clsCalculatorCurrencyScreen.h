@@ -1,42 +1,79 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
+#include <vector>
+#include "clsCurrency.h"
+#include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsScreen.h"
 #include "clsCurrency.h"
 
 using namespace std;
-class clsCalculatorCurrencyScreen : protected clsScreen
+class clsCalculatorCurrencyScreen :protected clsScreen
 {
 private:
-
-
-public :
-	static void ShowCalculatorCurrencyScreen() {
-		system("cls");
-		_DrawScreenHeader("\t Calculator Currency Screen");
-		string CurrencyCode1, CurrencyCode2;
-
-		// Currency Code 2
-		cout << "\n Please Enter Currency1 Code:";
-		CurrencyCode1 = clsInputValidate::ReadString();
-		if (!clsCurrency::IsCurrencyExist(CurrencyCode1)) {
-			cout << "\nThe Currency is not Found, choos anther one:";
-			CurrencyCode1 = clsInputValidate::ReadString();
+	static clsCurrency _GetCurrency(string Message ) {
+		cout << Message;
+		string CurrencyCod = clsInputValidate::ReadString();
+		while (!clsCurrency::IsCurrencyExist(CurrencyCod)) {
+			cout << "\nNot Found, Choos anther one:";
+			CurrencyCod = clsInputValidate::ReadString();
 		}
-		clsCurrency Currency1 = clsCurrency::FindByCode(CurrencyCode1);
+		clsCurrency Currency= clsCurrency::FindByCode(CurrencyCod);
+		return Currency;
+	}
 
-		// Currency Code 2
-		cout << "\n Please Enter Currency2 Code:";
-		CurrencyCode2 = clsInputValidate::ReadString();
-		if (!clsCurrency::IsCurrencyExist(CurrencyCode2)) {
-			cout << "\nThe Currency is not Found, choos anther one:";
-			CurrencyCode2 = clsInputValidate::ReadString();
+	static float _RateAmount() {
+		cout << "\n Please Enter Amount to Convert :";
+		float Amount = clsInputValidate::ReadFloatNumber();
+		return Amount;
+
+	}
+
+	static void _PrintCardCurrency(clsCurrency Currency,string Message="Info Card:") {
+		cout << "\n" << Message;
+		cout << "\n--------------------------------------------------------";
+		cout << "\n Country      :" << Currency.Country();
+		cout << "\n CurrencyCode :" << Currency.CurrencyCode();
+		cout << "\n CurrencyName :" << Currency.CurrencyName();
+		cout << "\n Rate         :" << Currency.Rate();
+		cout << "\n--------------------------------------------------------";
+	}
+
+	static void _PrintCalculatorResultCurrency(float Amount, clsCurrency CurrencyFrom, clsCurrency CurrencyTo) {
+		_PrintCardCurrency(CurrencyFrom, "Card Currency From:");
+
+		float AmountInUSD = CurrencyFrom.ConvertToUSD(Amount);
+		cout << "\n Amount " << Amount<<" " << CurrencyFrom.CurrencyCode() << " = " << AmountInUSD << " USD";
+		if (CurrencyTo.CurrencyCode() == "USD") {
+			return;
+		}
+		float AmountInOtherCurrency = CurrencyFrom.ConvertToOtherCurrency(Amount, CurrencyTo);
+		cout << "\n Amount " << Amount << " " << CurrencyFrom.CurrencyCode() << " = " << AmountInOtherCurrency << " " << CurrencyTo.CurrencyCode();
+
+	}
+
+
+public:
+
+	static void ShowCalculatorCurrencyScreen() {
+		char Choos = 'y';
+		while (Choos=='Y' || Choos=='y') {
+			system("cls");
+			_DrawScreenHeader("Calculate Currency Exchange");
+			clsCurrency CurrencyFrom = _GetCurrency("Please Enter The Currency Cod From:");
+			clsCurrency CurrencyTo = _GetCurrency("Please Enter The Currency Cod To:");
+			float RateAmount = _RateAmount();
+			_PrintCalculatorResultCurrency(RateAmount, CurrencyFrom, CurrencyTo);
+			cout << "\n Do you want do that anther time :y/n ";
+			cin >> Choos;
 		}
 		clsCurrency Currency1 = clsCurrency::FindByCode(CurrencyCode2);
 		float Amount = 0;
 		cout << "\nEnter Amount to ExChange:";
 		Amount = clsInputValidate::ReadFloatNumber();
 	}
+
 
 };
 

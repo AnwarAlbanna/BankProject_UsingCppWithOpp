@@ -128,17 +128,14 @@
     <ClInclude Include="clsFindCurrencyScreen.h">
       <Filter>Header Files\Currency</Filter>
     </ClInclude>
-    <ClInclude Include="clsCurrenciesListScreen.h">
+    <ClInclude Include="clsCalculatorCurrencyScreen.h">
       <Filter>Header Files\Currency</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="clsUpdateCurrencyScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clsCalculatorCurrencyScreen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="clsCurrenciesListScreen.h">
+      <Filter>Header Files\Currency</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
