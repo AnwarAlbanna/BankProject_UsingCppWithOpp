@@ -7,6 +7,7 @@
 #include "clsScreen.h"
 #include "clsCurrenciesListScreen.h"
 #include "clsFindCurrencyScreen.h"
+#include "clsUpdateCurrencyScreen.h"
 
 using namespace std;
 class clsCurrencisScreen :protected clsScreen
@@ -44,8 +45,8 @@ class clsCurrencisScreen :protected clsScreen
         }
         static void _ShowUpdateCurrencies()
         {
-            cout << "\n Update Currencies Screen Will be here...\n";
-
+            //cout << "\n Update Currencies Screen Will be here...\n";
+            clsUpdateCurrencyScreen::ShowUpdateCurrencyScreen();
         }
 
         static void _ShowCalculateCurrencies()

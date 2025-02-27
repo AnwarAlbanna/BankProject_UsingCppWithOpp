@@ -217,6 +217,6 @@ Viet Nam#//#VND#//#Viet Nam Dong#//#23624.000000
 Virgin Islands (UK)#//#USD#//#US Dollar#//#1.000000
 Virgin Islands (USA)#//#USD#//#US Dollar#//#1.000000
 Wallis and Futuna Islands#//#XPF#//#CFP Franc#//#111.954002
-"Yemen, Republic of"#//#YER#//#Yemeni Rial#//#541.750000
+"Yemen, Republic of"#//#YER#//#Yemeni Rial#//#615.000000
 Zambia#//#ZMW#//#Zambia Kwacha#//#17.440001
 Zimbabwe#//#ZWL#//#Zimbabwe RTGS dollar#//#645.414001
